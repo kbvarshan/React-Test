@@ -1,0 +1,224 @@
+﻿// Palidromes: Words that read the same forwards and backwards
+// Examples: dad, radar, taco cat
+//
+// Write a function that takes a string as an argument,
+// and returns true if the string is a palindrome,
+// and returns false if the string is not a palindrome
+// Letter case and spaces should be disregarded
+
+
+// isPalindrome('mom');        Should return true
+// isPalindrome('something'); Should return false
+// isPalindrome('TacO cAt'); Should return true
+
+
+function isPalindrome(str){
+        str = str.replace(/ /g, '').toLowerCase();
+        return str === str.split('').reverse().join('');
+}
+
+
+
+
+
+
+
+
+// Array Search
+// Given an array of strings like below,
+// write a function that returns an array
+// containing only those strings that match
+// a passed-in search string, regardless of case.
+//
+// Example:
+// var testArr = [
+//   'iPhone 7',
+//   'iPad Pro',
+//   'Mac Book Pro',
+//   'iMac',
+//   'IpHONE 6s',
+//   'iphone 3g',
+//   'iPod Nano',
+//   'iPhOnE SE'
+// ];
+//
+// findString(testArr, 'iPhone');
+//
+// Should return
+// [
+//   'iPhone 7',
+//   'IpHONE 6s',
+//   'iphone 3g',
+//   'iPhOnE SE'
+// ]
+
+
+function findString(arr, str){
+        return arr.filter(e=>e.toLowerCase().indexOf(str.toLowerCase())!==-1)
+}
+
+
+
+
+// Array Modifying
+// Given an array of strings like below,
+// write a function that returns an array
+// of objects with a specific property and value structure.
+//
+// Example:
+// var testArr = [
+//   'iPhone 7',
+//   'iPad Pro',
+//   'Mac Book Pro',
+//   'iMac',
+//   'IpHONE 6s',
+//   'iphone 3g',
+//   'iPod Nano',
+//   'iPhOnE SE'
+// ];
+//
+// arrayTransform(testArr);
+//
+// Should return
+// [
+//   {
+//     label: 'iPhone 7',
+//     name: 'iphone7',
+//     index: 0
+//   },
+//   {
+//     label: 'iPad Pro',
+//     name: 'ipadpro',
+//     index: 1
+//   },
+//   {
+//     label: 'Mac Book Pro',
+//     name: 'macbookpro',
+//     index: 2
+//   },
+//   ...
+// ]
+
+
+function arrayTransform(arr){
+        return arr.map((e, index)=>({label:e, name: e.toLowerCase().replace(/ /g,''),index: index}))
+}
+
+
+
+
+
+
+// Given an array of numbers,
+// write a function that returns the sum of those numbers.
+//
+// Example:
+// var testArr = [0, 1, 2, 3, 4];
+//
+// sumArray(testArr); Should return 10
+
+
+function sumArray(arr){
+        return arr.reduce((acc,e)=>acc+e, 0)
+}
+
+
+
+
+
+
+
+
+// Compare Objects
+// Write a function that compares two objects for equality.
+// It should return true if the object are true, and false otherwise.
+// Example:
+// const obj1 = { one: "one", two: 2, three: false }
+// const obj2 = { three: false, one: "one", two: 2 }
+// areObjsEqual(obj1, obj2) should return true
+
+
+function areObjsEqual(obj1, obj2){
+        if(obj1 === obj2){
+                return true;
+        }
+        if(typeof obj1 === 'object' && typeof obj2 === 'object' && obj1!==null && obj2!==null){
+                for(let p in obj1){
+                        if(obj1.hasOwnProperty(p)){
+                                if(!obj2.hasOwnProperty(p) || !areObjsEqual(obj1[p], obj2[p])){
+                                        return false;
+                                }
+                        }
+                }
+                for(let p in obj2){
+                        if(obj2.hasOwnProperty(p)){
+                                if(!obj1.hasOwnProperty(p) ){
+                                        return false;
+                                }
+                        }
+                }
+        }else {
+                return false;
+        }
+        return true;
+}
+
+
+
+
+
+
+// Filter Object
+// Given the below object, return the same object with only the editable fields
+
+
+{
+        name: {
+                editable: true,
+                value: 'Jack',
+                type: 'text'
+        },
+        phone: {
+                editable: true,
+                value: 8675309,
+                type: 'number'
+        },
+        id: {
+                editable: false,
+                value: 'JHA-252',
+                type: 'text'
+        }
+}
+
+
+
+
+function objectMap(obj){
+    var resultObj = { };
+
+
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key) && obj[key].editable) {
+        resultObj[key] = obj[key];
+      }
+    }
+        return resultObj;
+}
+// this will give result
+objectMap({
+        name: {
+                editable: true,
+                value: 'Jack',
+                type: 'text'
+        },
+        phone: {
+                editable: true,
+                value: 8675309,
+                type: 'number'
+        },
+        id: {
+                editable: false,
+                value: 'JHA-252',
+                type: 'text'
+        }
+})
